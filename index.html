@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/vite.svg"
+  />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <link
+    rel="stylesheet"
+    href="/src/css/style.css"
+  >
+  <title>TS Weather</title>
+</head>
+
+<div>
+  <header id="header">
+    <span class="logo">TS Weather</span>
+  </header>
+  <div class="container">
+    <section class="locationSearch">
+      <h2 class="offscreen">Search a city</h2>
+      <div class="search">
+        <label
+          for="search"
+          class="offscreen"
+        >Enter a city name</label>
+        <svg
+          x-bind:width="size"
+          x-bind:height="size"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+            stroke="#292D32"
+            x-bind:stroke-width="stroke"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          ></path>
+          <path
+            d="M22 22L20 20"
+            stroke="#292D32"
+            x-bind:stroke-width="stroke"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          ></path>
+        </svg>
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="City..."
+        >
+        <ul id="searchResults"></ul>
+      </div>
+    </section>
+
+    <section class="weather">
+      <div class="current">
+        <div class="location">
+          <span class="city">Saharanpur</span>
+          <span class="state">Uttar Pradesh India</span>
+        </div>
+        <div class="updated">
+          <span class="at">Updated at:</span>
+          <span class="time">06:00</span>
+        </div>
+        <div class="icon">
+          <img
+            src="https://cdn.weatherapi.com/weather/64x64/day/113.png"
+            alt="cloudy"
+          >
+          <span>Cloudy</span>
+        </div>
+        <div class="details">
+          <span class="temp">14 ℃</span>
+          <span class="extra">wind: 20kmph</span>
+          <span class="extra">precip: 20mb</span>
+          <span class="extra">pressure: 12bp</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <script
+    type="module"
+    src="/src/main.ts"
+  ></script>
+  </body>
+
+</html>

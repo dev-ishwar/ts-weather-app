@@ -1,0 +1,128 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --font-color: #0D4C92;
+  --accent-color: #59C1BD;
+  --background-color: #CFF5E7;
+  --secondary-light: #A0E4CB;
+
+  color-scheme: light dark;
+  color: var(--font-color);
+  background-color: var(--background-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+}
+
+#header {
+  font-size: 2rem;
+  font-weight: 500;
+  padding-inline: 1.5em;
+  padding-block: 0.5em;
+  border-bottom: 2px solid currentColor;
+  background-color: #0D4C92;
+  color: #CFF5E7;
+}
+
+.offscreen {
+  position: absolute;
+  left: -100000px;
+}
+
+.container {
+  width: clamp(40%, 400px, 70%);
+  margin: auto;
+}
+
+.search {
+  position: relative;
+  margin: 2em auto;
+}
+
+input,
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px;
+  padding-left: 40px;
+  background-color: transparent;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+.search input::placeholder {
+  color: currentColor;
+  opacity: 0.7;
+}
+
+.search input:focus {
+  outline: 1px solid var(--secondary-dark);
+}
+
+.search svg {
+  width: 1.25em;
+  height: 1.25em;
+  position: absolute;
+  left: 10px;
+  top: 12px;
+}
+
+.weather .current {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-wrap: wrap;
+  gap: 5px;
+  border: 1px solid currentColor;
+  padding-block: 15px;
+  padding-inline: 10px;
+  background-color: var(--accent-color);
+}
+
+.current>div:not(.updated) {
+  display: flex;
+  flex-direction: column;
+}
+
+.current>div:not(.icon) {
+  padding-left: 10px;
+}
+
+.current .icon {
+  justify-content: center;
+  align-items: center;
+}
+
+.current .details .temp {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: #0D4C92;
+    --accent-color: #59C1BD;
+    --font-color: #CFF5E7;
+    --secondary-light: #A0E4CB;
+
+    color: var(--font-color);
+    background-color: var(--background-color);
+  }
+}
