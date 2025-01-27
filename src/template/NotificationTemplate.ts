@@ -51,7 +51,6 @@ export class NotificationTemplate implements INofication {
 
         this.container.classList.remove('hide');
         this.container.classList.add('show');
-        console.log('bar ', this.bar)
         this.showBar();
     }
 

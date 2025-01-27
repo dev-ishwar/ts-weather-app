@@ -26,7 +26,6 @@ const searchLocation = async (query: string) => {
 }
 
 export const handleLocationClick = async (place: SearchItem) => {
-  console.log('place: ', place, place.county)
   loader.show();
 
   const template = CurrentWeatherTemplate.instance;

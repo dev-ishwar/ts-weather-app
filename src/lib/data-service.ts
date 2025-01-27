@@ -45,7 +45,7 @@ export const fetchCurrentWeather = async (query: string) => {
         const url = `https://api.weatherapi.com/v1/forecast.json?q=${query}&days=5&key=${key}`
         const res = await fetch(url);
         const data: WeatherResponse = await res.json();
-        console.log('weather resp: ', data)
+
         if (data?.error) {
             return {
                 error: data.error.message
