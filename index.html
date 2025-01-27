@@ -24,6 +24,7 @@
     <span class="logo">TS Weather</span>
   </header>
   <div class="container">
+    <!-- Search Location -->
     <section class="locationSearch">
       <h2 class="offscreen">Search a city</h2>
       <div class="search">
@@ -68,13 +69,30 @@
       </div>
     </section>
 
+    <!-- Current Weather -->
     <section
       class="weather"
       id="weather"
     ></section>
 
-    <div id="loader" class="hide">
-        <div class="circle"></div>
+    <!-- Loader -->
+    <div
+      id="loader"
+      class="hide"
+    >
+      <div class="circle"></div>
+    </div>
+
+    <!-- Notification -->
+    <div
+      id="notification"
+      class="notification_container"
+    >
+      <div class="notification">
+        <button id="close-notification">X</button>
+        <p id="notification__message">Something went wrong!</p>
+        <div class="notification__bar"></div>
+      </div>
     </div>
   </div>
   <script
