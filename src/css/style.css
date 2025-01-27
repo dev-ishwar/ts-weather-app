@@ -3,14 +3,19 @@
   line-height: 1.5;
   font-weight: 400;
 
-  --font-color: #0D4C92;
-  --accent-color: #59C1BD;
-  --background-color: #CFF5E7;
-  --secondary-light: #A0E4CB;
+  --darker: #12372A;
+  --dark: #436850;
+  --lighter: #FBFADA;
+  --light: #ADBC9F;
+
+  --border: var(--lighter);
+  --background: var(--dark);
+  --font: var(--lighter);
+  --accent: var(--lighter);
 
   color-scheme: light dark;
-  color: var(--font-color);
-  background-color: var(--background-color);
+  color: var(--font);
+  background-color: var(--dark);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,13 +25,18 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background-color: #0D4C92;
-    --accent-color: #59C1BD;
-    --font-color: #CFF5E7;
-    --secondary-light: #A0E4CB;
+    --darker: #12372A;
+    --dark: #436850;
+    --lighter: #FBFADA;
+    --light: #ADBC9F;
 
-    color: var(--font-color);
-    background-color: var(--background-color);
+    --border: var(--dark);
+    --background: var(--light);
+    --font: var(--darker);
+    --accent: var(--lighter);
+
+    color: var(--font);
+    background-color: var(--background);
   }
 }
 
@@ -46,7 +56,7 @@ body {
   padding-inline: 1.5em;
   padding-block: 0.5em;
   border-bottom: 2px solid currentColor;
-  background-color: #0D4C92;
+  background-color: var(--darker);
   color: #CFF5E7;
 }
 
@@ -56,7 +66,7 @@ body {
 }
 
 .container {
-  width: clamp(40%, 400px, 70%);
+  width: clamp(40%, 500px, 70%);
   margin: auto;
 }
 
@@ -86,7 +96,7 @@ button {
 }
 
 .search input:focus {
-  outline: 1px solid var(--secondary-dark);
+  outline: 1px solid var(--darker);
 }
 
 .search svg {
@@ -95,17 +105,21 @@ button {
   position: absolute;
   left: 10px;
   top: 12px;
+  filter: drop-shadow(2px 2px var(--font));
 }
 
 .weather .current {
   display: grid;
   grid-template-columns: 1fr 1fr;
   flex-wrap: wrap;
-  gap: 5px;
-  border: 1px solid currentColor;
+  gap: 25px;
   padding-block: 15px;
   padding-inline: 10px;
-  background-color: var(--accent-color);
+  background-color: var(--background);
+  box-shadow: 1px 1px 3px var(--darker) inset,
+    3px 4px 4px var(--darker),
+    3px 10px 4px var(--dark),
+    3px 3px 4px var(--lighter);
 }
 
 .current>div:not(.updated) {
@@ -134,16 +148,17 @@ button {
 ul#searchResults {
   position: absolute;
   list-style: none;
-  background-color: var(--background-color);
+  background-color: var(--background);
   width: 100%;
-  border: 2px solid var(--accent-color);
+  border: 2px solid var(--border);
   margin-top: 5px;
   padding: 5px;
 }
 
 ul#searchResults li {
-  border-bottom: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--border);
   cursor: pointer;
+  padding: 10px;
 }
 
 ul#searchResults li:last-child {
@@ -169,7 +184,7 @@ ul#searchResults:empty {
     width: 100px;
     height: 100px;
     border-radius: 100%;
-    border: 6px solid #0D4C92;
+    border: 6px solid var(--background);
     border-top-color: white;
     background-color: transparent;
     animation: spin 2s linear infinite;
@@ -180,6 +195,7 @@ ul#searchResults:empty {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -194,7 +210,7 @@ ul#searchResults:empty {
   position: absolute;
   top: 5.5em;
   right: 10px;
-  background-color: #fff;
+  background-color: var(--light);
   border-radius: 5px;
 
   transition: transform 1s ease-in-out;
@@ -208,17 +224,16 @@ ul#searchResults:empty {
 .notification {
   min-width: 250px;
   padding: 20px;
-  border: 1px solid var(--font-color);
+  border: 1px solid var(--border);
   border-radius: 5px;
   position: relative;
-  border-color: var(--border);
-  color: var(--font);
+  color: var(--darker);
 }
 
 .notification__bar {
   width: 100%;
   height: 5px;
-  background-color: var(--font-color);
+  background-color: var(--darker);
   position: absolute;
   bottom: 0;
   left: 0;
@@ -229,4 +244,22 @@ ul#searchResults:empty {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .weather .current {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .current>* {
+    box-shadow: 0 1px 2px;
+    padding: 16px;
+  }
+
+  .notification_container {
+    right: 0;
+    margin-block: auto;
+  }
 }
