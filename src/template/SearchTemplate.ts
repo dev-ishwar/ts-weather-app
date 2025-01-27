@@ -17,7 +17,6 @@ export default class SearchTemplate implements DOMList {
 
     clear(): void {
         this.ul.innerHTML = "";
-        this.ul.classList.add('hide');
     }
 
     render(searchList: SearchList): void {
