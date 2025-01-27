@@ -18,6 +18,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: #0D4C92;
+    --accent-color: #59C1BD;
+    --font-color: #CFF5E7;
+    --secondary-light: #A0E4CB;
+
+    color: var(--font-color);
+    background-color: var(--background-color);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -115,14 +127,30 @@ button {
   font-weight: 500;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background-color: #0D4C92;
-    --accent-color: #59C1BD;
-    --font-color: #CFF5E7;
-    --secondary-light: #A0E4CB;
+.locationSearch {
+  position: relative;
+}
 
-    color: var(--font-color);
-    background-color: var(--background-color);
-  }
+ul#searchResults {
+  position: absolute;
+  list-style: none;
+  background-color: var(--background-color);
+  width: 100%;
+  border: 2px solid var(--accent-color);
+  margin-top: 5px;
+  padding: 5px;
+}
+
+ul#searchResults li {
+  border-bottom: 1px solid var(--accent-color);
+  cursor: pointer;
+}
+
+ul#searchResults li:last-child {
+  border: none;
+}
+
+ul#searchResults:empty {
+  display: none;
+  background-color: red;
 }

@@ -62,37 +62,16 @@
           name="search"
           id="search"
           placeholder="City..."
+          autocomplete="off"
         >
         <ul id="searchResults"></ul>
       </div>
     </section>
 
-    <section class="weather">
-      <div class="current">
-        <div class="location">
-          <span class="city">Saharanpur</span>
-          <span class="state">Uttar Pradesh India</span>
-        </div>
-        <div class="updated">
-          <span class="at">Updated at:</span>
-          <span class="time">06:00</span>
-        </div>
-        <div class="icon">
-          <img
-            src="https://cdn.weatherapi.com/weather/64x64/day/113.png"
-            alt="cloudy"
-          >
-          <span>Cloudy</span>
-        </div>
-        <div class="details">
-          <span class="temp">14 ℃</span>
-          <span class="extra">wind: 20kmph</span>
-          <span class="extra">precip: 20mb</span>
-          <span class="extra">pressure: 12bp</span>
-        </div>
-      </div>
-    </section>
-
+    <section
+      class="weather hide"
+      id="weather"
+    ></section>
   </div>
   <script
     type="module"

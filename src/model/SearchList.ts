@@ -2,12 +2,13 @@ import { SearchItem } from "./SearchListItem";
 
 interface List {
     list: SearchItem[],
-    load(): void,
+    load(items: SearchItem[]): void,
     clearList(): void
 }
 
 export default class SearchList implements List {
-    private constructor(private _list: SearchItem[]) { }
+    static readonly instance: SearchList = new SearchList();
+    private constructor(private _list: SearchItem[] = []) { }
 
     get list(): SearchItem[] {
         return this._list;
@@ -21,7 +22,7 @@ export default class SearchList implements List {
         this._list = [];
     }
 
-    load(): void {
-        
+    load(items: SearchItem[]): void {
+        this._list = items;
     }
 }

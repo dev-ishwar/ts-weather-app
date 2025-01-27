@@ -3,6 +3,11 @@ export interface SearchItem {
     city: string;
     state: string;
     country: string;
+    placeId?: string;
+    formatted: string;
+    lat?: number;
+    lon?: number;
+    county: string;
 }
 
 export default class SearchListItem implements SearchItem {
@@ -10,7 +15,9 @@ export default class SearchListItem implements SearchItem {
         private _id: string = "",
         private _city: string = "",
         private _state: string = "",
-        private _country: string = ""
+        private _country: string = "",
+        private _formatted: string = "",
+        private _county: string = "",
     ) { }
 
     get id(): string {
@@ -43,5 +50,21 @@ export default class SearchListItem implements SearchItem {
 
     set country(country: string) {
         this._country = country;
+    }
+
+    get formatted(): string {
+        return this._formatted;
+    }
+
+    set formatted(formatted: string) {
+        this._formatted = formatted;
+    }
+
+    get county(): string {
+        return this._county;
+    }
+
+    set county(county: string) {
+        this._county = county;
     }
 }

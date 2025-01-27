@@ -1,3 +1,4 @@
+import { handleLocationClick } from "../main";
 import SearchList from "../model/SearchList";
 
 interface DOMList {
@@ -16,6 +17,7 @@ export default class SearchTemplate implements DOMList {
 
     clear(): void {
         this.ul.innerHTML = "";
+        this.ul.classList.add('hide');
     }
 
     render(searchList: SearchList): void {
@@ -25,17 +27,17 @@ export default class SearchTemplate implements DOMList {
             li.className = 'item';
 
             const span = document.createElement("span");
-            span.innerText = `${item.city} ${item.state} ${item.country}`
+            span.innerText = item.formatted
             li.append(span);
 
             li.addEventListener("click", () => {
-                console.log('item Clicked: ', item)
+                handleLocationClick(item);
             })
 
             this.ul.append(li);
         })
 
-        if(!searchList.list.length) {
+        if (!searchList.list.length) {
             const li = document.createElement("li");
             li.className = 'item';
 

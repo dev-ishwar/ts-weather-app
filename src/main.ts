@@ -1,20 +1,43 @@
-import { fetchCities, fetchUsers } from "./lib/data-service";
+import { fetchCities, fetchCurrentWeather } from "./lib/data-service";
 import { debounce } from "./lib/helper";
+import SearchList from "./model/SearchList";
+import { SearchItem } from "./model/SearchListItem";
+import CurrentWeatherTemplate from "./template/CurrentWeatherTemplate";
+import SearchTemplate from "./template/SearchTemplate";
 
-const print = async (query: string) => {
-  console.log('s: ', query)
+const searchList = SearchList.instance;
+const searchTemplace = SearchTemplate.instance;
+
+const searchLocation = async (query: string) => {
+  if (!query) {
+    searchTemplace.clear();
+    return;
+  };
+
   const cities = await fetchCities(query);
-  console.log('cities', cities);
+
+  searchList.load(cities);
+  searchTemplace.render(searchList);
+}
+
+export const handleLocationClick = async (place: SearchItem) => {
+  console.log('place: ', place, place.county)
+  const template = CurrentWeatherTemplate.instance;
+  const res = await fetchCurrentWeather(place.county ?? place.city);
+
+  console.log('error: ', res?.error);
+  if (res?.weather) {
+    searchTemplace.clear();
+    template.render(res.weather);
+  }
 }
 
 
 // ?? How to handle async function in debounce.
-const debounceSearch = debounce(print, 500);
+const debounceSearch = debounce(searchLocation, 500);
 const init = () => {
-  console.log(import.meta.env)
   const input = document.getElementById('search') as HTMLInputElement;
   input.addEventListener('input', function (this: HTMLInputElement) {
-    // console.log('ece: ', this.value)
     debounceSearch(this.value);
   })
 }
