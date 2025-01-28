@@ -1,8 +1,7 @@
 import { Weather } from "../model/CurrentWeather";
 import { SearchItem } from "../model/SearchListItem";
-import DummyWeather from ".//dummy.json";
+import { DailyWeatherType, WeatherResponse } from "./types";
 
-type WeatherResponse = typeof DummyWeather;
 const API_URL = `https://jsonplaceholder.typicode.com/users`;
 
 export const fetchUsers = async () => {
@@ -66,8 +65,18 @@ export const fetchCurrentWeather = async (query: string) => {
             condition_text: weather.condition.text,
             condition_icon: weather.condition.icon,
         };
+
+        // return forecast for future dates
+        const forecast: DailyWeatherType[] = data.forecast.forecastday.slice(1).map(item => ({
+            date: item.date,
+            mintemp_c: item.day.mintemp_c,
+            maxtemp_c: item.day.maxtemp_c,
+            condition: item.day.condition,
+        }))
+
         return {
-            weather: result
+            weather: result,
+            forecast
         };
     } catch (error) {
         throw new Error(error instanceof Error ? error.message : "Failed to fetch weather.");

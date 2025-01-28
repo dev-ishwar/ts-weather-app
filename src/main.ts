@@ -3,6 +3,7 @@ import { debounce } from "./lib/helper";
 import SearchList from "./model/SearchList";
 import { SearchItem } from "./model/SearchListItem";
 import CurrentWeatherTemplate from "./template/CurrentWeatherTemplate";
+import DailyForecastTemplate from "./template/DailyForecastTemplate";
 import { Loader } from "./template/Loader";
 import { NofificationTypeEnum, NotificationTemplate } from "./template/NotificationTemplate";
 import SearchTemplate from "./template/SearchTemplate";
@@ -29,22 +30,29 @@ export const handleLocationClick = async (place: SearchItem) => {
   loader.show();
 
   const template = CurrentWeatherTemplate.instance;
-  const q = `${place.lat},${place.lon}`; //  place.city ?? place.county;
+  const dailyForecastTemplate = DailyForecastTemplate.instance;
+
+  const q = `${place.lat},${place.lon}`;
   const res = await fetchCurrentWeather(q);
 
   console.log('error: ', res?.error);
 
+  loader.hide();
+
   if (res?.error) {
     notification.show(res.error, NofificationTypeEnum.ERROR);
+    return;
   }
 
-  if (res?.weather) {
-    notification.show(`Weather for ${place.formatted}`);
-  
-    searchTemplace.clear();
-    template.render(res.weather);
-  }
-  loader.hide();
+  if (!res?.weather) {
+    notification.show(`Weather data not available.`, NofificationTypeEnum.ERROR);
+    return;
+  };
+
+  notification.show(`Weather for ${place.formatted}`);
+  searchTemplace.clear();
+  template.render(res.weather);
+  dailyForecastTemplate.render(res.forecast);
 }
 
 

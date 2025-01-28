@@ -1,3 +1,4 @@
+import { formateDateTime } from "../lib/helper";
 import { Weather } from "../model/CurrentWeather";
 
 interface CurrentWeatherUI {
@@ -56,7 +57,7 @@ function createWeatherTemplate(weather: Weather) {
 
     const updateAtSpan = document.createElement('span');
     updateAtSpan.classList.add('update_at');
-    updateAtSpan.innerText = weather.last_updated;
+    updateAtSpan.innerText = formateDateTime(weather.last_updated, false);
 
     updatedDiv.appendChild(atSpan);
     updatedDiv.appendChild(updateAtSpan);
@@ -84,6 +85,7 @@ function createWeatherTemplate(weather: Weather) {
     const tempSpan = document.createElement('span');
     tempSpan.classList.add('temp');
     tempSpan.innerText = weather.temp_c?.toString();
+    tempSpan.appendChild(document.createTextNode('°C'))
 
     const windP = document.createElement('p');
     windP.classList.add('extra');
