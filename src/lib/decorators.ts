@@ -8,6 +8,7 @@
  */
 
 // Method decorator
+// @ts-ignore
 export function loggedMethod(
     target: any,
     propertyKey: string,
