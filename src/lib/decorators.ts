@@ -8,9 +8,8 @@
  */
 
 // Method decorator
-// @ts-ignore
 export function loggedMethod(
-    target: any,
+    _target: any, // prefixed with _ to avoid build error - target' is declared but its value is never read.
     propertyKey: string,
     descriptor: PropertyDescriptor
   ): PropertyDescriptor {
