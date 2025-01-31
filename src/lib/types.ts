@@ -1,3 +1,5 @@
+import { Weather } from "../model/CurrentWeather"
+
 export interface WeatherResponse {
     error: Error
     location: Location
@@ -145,3 +147,62 @@ export interface Hour {
 }
 
 export type DailyWeatherType = Pick<Day, 'maxtemp_c' | 'mintemp_c' | 'condition'> & Pick<Forecastday, 'date'>;
+
+// Discriminated union
+export type CurrentWeatherResponse =
+    {
+        success: true,
+        weather: Weather,
+        forecast: DailyWeatherType[]
+    } | {
+        success: false,
+        error: string
+    }
+
+// MARK: Extra types / topics
+
+// Literal types
+export type PI = 3.14;
+export type Size = 'L' | 'M' | 'S';
+
+// template union type / template literal type
+export type TemplateType = `${PI}_${Size}`;
+
+// Indexed Access Type
+export type DailyMaxTempType = DailyWeatherType['maxtemp_c'];
+
+// Object Type
+type ConditionObjectType = {
+    text: string,
+    icon: string,
+    code: number,
+}
+
+// keyof type operator
+// return    the union of keys of the given object type
+export type ConditionDataType = keyof ConditionObjectType;
+
+// object literal
+const ob = {
+    text: 'Cloudy',
+    icon: '/icon.png',
+    code: 123,
+}
+
+// typeof - returns the type of given value (object/function etc)
+export type o = typeof ob
+
+// Declaration merging
+// merges the multiple declarations of the same interface into a combine interface with all properties
+interface Person {
+    name: string
+}
+
+interface Person {
+    age: number
+}
+
+export const P: Person = {
+    name: 'Mayank',
+    age: 16
+}

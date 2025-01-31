@@ -35,11 +35,12 @@ export const handleLocationClick = async (place: SearchItem) => {
   const q = `${place.lat},${place.lon}`;
   const res = await fetchCurrentWeather(q);
 
-  console.log('error: ', res?.error);
-
+  
   loader.hide();
 
-  if (res?.error) {
+  if(!res) return;
+
+  if (!res?.success) {
     notification.show(res.error, NofificationTypeEnum.ERROR);
     return;
   }

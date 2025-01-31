@@ -1,6 +1,6 @@
-import { Weather } from "../model/CurrentWeather";
+import type { Weather } from "../model/CurrentWeather";
 import { SearchItem } from "../model/SearchListItem";
-import { DailyWeatherType, WeatherResponse } from "./types";
+import { CurrentWeatherResponse, DailyWeatherType, WeatherResponse } from "./types";
 
 const API_URL = `https://jsonplaceholder.typicode.com/users`;
 
@@ -37,7 +37,7 @@ export const fetchCities = async (query: string) => {
     }
 }
 
-export const fetchCurrentWeather = async (query: string) => {
+export const fetchCurrentWeather = async (query: string): Promise<CurrentWeatherResponse | null> => {
     if (!query) return null;
     try {
         const key = import.meta.env.VITE_WEATHER_API_KEY;
@@ -47,6 +47,7 @@ export const fetchCurrentWeather = async (query: string) => {
 
         if (data?.error) {
             return {
+                success: false,
                 error: data.error.message
             }
         }
@@ -75,6 +76,7 @@ export const fetchCurrentWeather = async (query: string) => {
         }))
 
         return {
+            success: true,
             weather: result,
             forecast
         };

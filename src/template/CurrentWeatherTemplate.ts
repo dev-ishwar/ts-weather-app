@@ -1,3 +1,4 @@
+import { loggedMethod } from "../lib/decorators";
 import { formateDateTime } from "../lib/helper";
 import { Weather } from "../model/CurrentWeather";
 
@@ -19,6 +20,7 @@ export default class CurrentWeatherTemplate implements CurrentWeatherUI {
         this.container.innerHTML = '';
     }
 
+    @loggedMethod
     render(weather: Weather): void {
         this.clear();
         const template = createWeatherTemplate(weather);

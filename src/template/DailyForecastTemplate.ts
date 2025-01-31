@@ -1,3 +1,4 @@
+import { loggedMethod } from "../lib/decorators";
 import { formateDate } from "../lib/helper";
 import { DailyWeatherType } from "../lib/types";
 
@@ -14,6 +15,7 @@ export default class DailyForecastTemplate implements DailyForecastUI {
         this.container = document.getElementById('daily-forecast') as HTMLElement;
     }
 
+    @loggedMethod
     render(forecast: DailyWeatherType[]): void {
         this.clear();
         console.log('forecast: ', forecast)
